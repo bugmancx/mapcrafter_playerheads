@@ -1,9 +1,9 @@
 #!/bin/bash
 
-#MAPCRAFTER_MARKERS=/home/minecraft/git/_minecraft/_mapcrafter/115/mapcrafter/src/mapcrafter_markers
-MAPCRAFTER_MARKERS=/home/minecraft/git/_minecraft/_mapcrafter/mapcrafter/src/mapcrafter_markers
-
 ##
+# This script doesn't read the main configuration file so we are specifying this manually.
+# This could be tidied up later; sorry.
+MAPCRAFTER_MARKERS_BIN=/home/minecraft/git/mapcrafter/src/mapcrafter_markers
 
 set -e
 
@@ -54,5 +54,4 @@ fi
 }
 
 # Run it
-$MAPCRAFTER_MARKERS $VERBOSE -c $CONFIG
-#$($MAPCRAFTER_MARKERS $VERBOSE -c $CONFIG)
+$MAPCRAFTER_MARKERS_BIN $VERBOSE -c $CONFIG

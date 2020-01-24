@@ -1,8 +1,7 @@
 #!/bin/bash
 
-MAPCRAFTER=/home/minecraft/mapcrafter/src/mapcrafter
-
 ##
+MAPCRAFTER_BIN=/home/minecraft/git/mapcrafter/src/mapcrafter
 
 set -e
 
@@ -53,5 +52,4 @@ fi
 }
 
 # Run it
-$MAPCRAFTER $VERBOSE -c $CONFIG
-#$($MAPCRAFTER $VERBOSE -c $CONFIG)
+$MAPCRAFTER_BIN $VERBOSE -j 4 -c $CONFIG

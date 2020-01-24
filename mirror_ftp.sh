@@ -1,6 +1,9 @@
 #!/bin/bash
 
 # Script to mirror the world from an FTP server
+VERBOSE="--verbose=2"
+GLOBS="--exclude crash-reports/ --exclude debug/ --exclude jar/ --exclude logs/ --exclude-glob *.zip --exclude-glob *.log --exclude entities.nbt.gz" # Except the globs
+SRC_DIR="/"
 
 # Defaults
 
@@ -77,13 +80,13 @@ function mirror {
  lftp \
  	-u $USERNAME,$PASSWORD \
  	$SERVER \
-        	-e "mirror $GLOBS --delete --verbose $SRC_DIR $DST_DIR/ && exit" 
+        	-e "mirror --delete-first $GLOBS $VERBOSE $SRC_DIR $DST_DIR/ && exit" 
 }
 
 
 if [ "$SYNC" == "playerdata" ] ; then # Playerdata override was set
   SRC_DIR=/world/playerdata
-  DST_DIR=$INSTANCEDIR/$WORLD/world/playerdata
+  DST_DIR=$INSTANCEDIR/$WORLD
 
   mirror
 
@@ -98,8 +101,6 @@ else
   touch /tmp/mirror.$WORLD.lock
 
   # Sync everything
-  GLOBS="--exclude crash-reports/ --exclude debug/ --exclude jar/ --exclude logs/ --exclude-glob *.zip --exclude-glob *.log" # Except the globs
-  SRC_DIR="/"
   DST_DIR=$INSTANCEDIR/$WORLD
 
   mirror
